@@ -1,0 +1,33 @@
+name: Build Tweak
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+name: Checkout Code
+    uses: actions/checkout@v4
+
+    
+name: Set up Theos and SDK
+    uses: Randomblock1/theos-action@v1
+    with:
+      theos-src: 'theos/theos'
+
+    
+name: Compile Package
+    run: |
+      make package FINALPACKAGE=1
+
+    
+name: Upload Finished DEB
+    uses: actions/upload-artifact@v4
+    with:
+      name: DevApps-Package
+      path: packages/*.deb
