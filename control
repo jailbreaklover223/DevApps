@@ -1,0 +1,10 @@
+Package: com.afghan531.devapps
+Name: DevApps
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm64
+Description: Bypasses the "Untrusted Developer" prompt globally on iOS 14.
+Maintainer: afghan531
+Author: afghan531
+Section: Tweaks
+Repository: https://havoc.app/
