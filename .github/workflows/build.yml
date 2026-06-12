@@ -1,34 +1,24 @@
 name: Build DevApps Tweak
-
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
 jobs:
   build:
     runs-on: ubuntu-22.04
-
-    steps:
-      
+    steps:   
 name: Checkout Repository
-      uses: actions/checkout@v4
-
-      
+      uses: actions/checkout@v4  
 name: Setup Theos Compiler Environment
       run: |
         sudo apt-get update
         sudo apt-get install -y git perl make clang linkmap
         bash -c "$(curl -fsSL https://githubusercontent.com/)"
         echo "THEOS=/home/runner/theos" >> $GITHUB_ENV
-
-      
 name: Download iOS SDKs
       run: |
         git clone https://github.com/ /home/runner/theos/sdks
-
-      
 name: Compile Tweak
       run: |
         export THEOS=/home/runner/theos
