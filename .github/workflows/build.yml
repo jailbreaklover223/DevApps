@@ -15,8 +15,8 @@ name: Checkout Repository
 uses: actions/checkout@v4
 
     
-name: Setup Theos Compiler Environment
-    run: |
+- name: Setup Theos Compiler Environment
+run: |
       sudo apt-get update
       sudo apt-get install -y git perl build-essential libssl-dev rsync clang lzma liblzma-dev
       bash -c "$(curl -fsSL https://githubusercontent.com/)"
