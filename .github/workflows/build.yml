@@ -2,43 +2,23 @@ name: Build DevApps Tweak
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-22.04
 
     steps:
-    
+      
 name: Checkout Repository
-uses: actions/checkout@v4
+      uses: actions/checkout@v4,
 
-    
-- name: Setup Theos Compiler Environment
-run: |
-      sudo apt-get update
-      sudo apt-get install -y git perl build-essential libssl-dev rsync clang lzma liblzma-dev
-      bash -c "$(curl -fsSL https://githubusercontent.com/)"
-      echo "THEOS=/home/runner/theos" >> $GITHUB_ENV
-
-    
-name: Download Official iOS 14 SDK
-    run: |
-      mkdir -p /home/runner/theos/sdks
-      curl -L https://github.com/ -o sdk.tar.xz
-      tar -xf sdk.tar.xz -C /home/runner/theos/sdks/
-      rm sdk.tar.xz
-
-    
-name: Compile Tweak Package
-    run: |
-      export THEOS=/home/runner/theos
-      make package FINALPACKAGE=1
-
-    
-name: Upload Finished DEB File
-    uses: actions/upload-artifact@v4
-    with:
-      name: DevApps-Package
-      path: packages/*.deb
+      
+name: Setup Theos Compiler Environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git perl make
+        bash -c "$(curl -fsSL https://githubusercontent.com/)"
+        echo "THEOS=/home/runner/theos" >> $GITHUB_ENV
