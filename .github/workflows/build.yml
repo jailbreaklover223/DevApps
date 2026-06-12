@@ -13,12 +13,23 @@ jobs:
     steps:
       
 name: Checkout Repository
-      uses: actions/checkout@v4,
+      uses: actions/checkout@v4
 
       
 name: Setup Theos Compiler Environment
       run: |
         sudo apt-get update
-        sudo apt-get install -y git perl make
+        sudo apt-get install -y git perl make clang linkmap
         bash -c "$(curl -fsSL https://githubusercontent.com/)"
         echo "THEOS=/home/runner/theos" >> $GITHUB_ENV
+
+      
+name: Download iOS SDKs
+      run: |
+        git clone https://github.com/ /home/runner/theos/sdks
+
+      
+name: Compile Tweak
+      run: |
+        export THEOS=/home/runner/theos
+        make package FINALPACKAGE=1
